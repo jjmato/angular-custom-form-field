@@ -4,7 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/for
 @Component({
   selector: 'app-custom-input',
   template: `
-  <input [(ngModel)]="value"/>
+  <input [(ngModel)]="value" value="value"/>
   <p>local: {{val}}</p>`,
   providers: [
     // {
@@ -19,8 +19,9 @@ export class CustomInputComponent implements ControlValueAccessor {
   constructor(
     @Optional() @Self() public control: NgControl
   ) { 
-    debugger;
+    this.value = this.control.value;
     this.control.valueAccessor = this;
+    // window.control = this.control;
   }
 
   onChange: any = () => { }

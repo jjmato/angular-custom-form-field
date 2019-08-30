@@ -7,7 +7,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent  {
-  external : string;
+  external : string = 'pika ⚡';
   form;
 
   constructor(

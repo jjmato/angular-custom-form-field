@@ -19,7 +19,7 @@ export class CustomInputComponent implements ControlValueAccessor {
   constructor(
     @Optional() @Self() public control: NgControl
   ) { 
-    this.value = this.control.value;
+    // this.value = this.control.value;
     this.control.valueAccessor = this;
     // window.control = this.control;
   }
@@ -34,8 +34,8 @@ export class CustomInputComponent implements ControlValueAccessor {
       this.onChange(val)
       this.onTouch(val)
     }
-
   }
+  get value() { return this.val;}
 
   writeValue(value: any) {
     this.value = value

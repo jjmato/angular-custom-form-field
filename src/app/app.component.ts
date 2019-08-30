@@ -8,11 +8,12 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class AppComponent  {
   external : string;
+  form;
 
   constructor(
     private fb: FormBuilder
   ){
-    this.fb.group({
+    this.form = this.fb.group({
       'custom': [
         'init_value',
         [
@@ -21,5 +22,9 @@ export class AppComponent  {
         ]
       ]
     })
+  }
+
+  get control() {
+    return this.form.get('custom');
   }
 }

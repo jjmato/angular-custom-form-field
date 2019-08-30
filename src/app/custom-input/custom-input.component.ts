@@ -1,43 +1,50 @@
-import { Component, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Self, Optional } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 
 @Component({
   selector: 'app-custom-input',
-  template: '<input [(ngModel)]="value"/>local: {{val}}',
+  template: `
+  <input [(ngModel)]="value"/>
+  <p>local: {{val}}</p>`,
   providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CustomInputComponent),
-      multi: true
-    }
+    // {
+    //   provide: NG_VALUE_ACCESSOR,
+    //   useExisting: CustomInputComponent,
+    //   multi: true
+    // }
   ]
 })
 export class CustomInputComponent implements ControlValueAccessor {
 
-  constructor() { }
-
-  onChange: any = () => {}
-  onTouch: any = () => {}
-  val= ""
-
-  set value(val){
-    if( val !== undefined && this.val !== val){
-    this.val = val
-    this.onChange(val)
-    this.onTouch(val)
-    }
-   
+  constructor(
+    @Optional() @Self() public control: NgControl
+  ) { 
+    debugger;
+    this.control.valueAccessor = this;
   }
 
-  writeValue(value: any){
+  onChange: any = () => { }
+  onTouch: any = () => { }
+  val = ""
+
+  set value(val) {
+    if (val !== undefined && this.val !== val) {
+      this.val = val
+      this.onChange(val)
+      this.onTouch(val)
+    }
+
+  }
+
+  writeValue(value: any) {
     this.value = value
   }
 
-  registerOnChange(fn: any){
+  registerOnChange(fn: any) {
     this.onChange = fn
   }
 
-  registerOnTouched(fn: any){
+  registerOnTouched(fn: any) {
     this.onTouch = fn
   }
 

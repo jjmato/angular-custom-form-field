@@ -1,12 +1,22 @@
-<!-- <p>
+<p>
 	input:
 </p>
-
 <app-custom-input [(ngModel)]="external" name="externalVal" #validations="ngModel"></app-custom-input>
-external: {{external}}
-<p>{{validations.control | json}}</p> -->
+<p>external: {{external}}</p>
+<pre>{{validations.control | json:2}}</pre> 
 
+<br/><br/><br/>
 
-<form [formGorup]="form">
-	<app-custom-input name="custom" formControlName="custom"></app-custom-input>
+<form [formGroup]="form">
+	<app-custom-input name="custom" formControlName="custom" #custom></app-custom-input>
 </form>
+
+<!-- <pre>
+{{ custom | json:2 }}
+</pre> -->
+
+<pre>
+value  : {{ control.value }}
+valid  : {{ control.valid }}
+errors : {{ control.errors | json}}
+</pre>
